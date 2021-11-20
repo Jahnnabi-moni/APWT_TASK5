@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+    <title>API POST DATA</title>
+
+</head>
+<body class="container">
+        
+ 
+    <h1 align="left" style="color:green;">Registration</h1>
+<form action="http://127.0.0.1:8000/api/Corporate/ApiRegistration" class="col-md-6" method="post">
+        
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="uname">Username</label>
+            <input type="text" id="uname" name="uname" value="" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" value=""class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value=""class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" value=""class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" value=""class="form-control">
+        </div>
+
+
+        <div class="form-group">
+            <label for="jobtype">Choose a Job Type</label>
+
+        <select name="jobtype" id="jobtype">
+        <option value="officer" id="jobtype">Officer</option>
+        <option value="manager" id="jobtype" >Manager</option>
+        <option value="director" id="jobtype">Director</option>
+         <option value="clerk" id="jobtype">Clerk</option>
+        </select>
+        </div>
+
+        <button type="button" onclick=loadDoc() class="btn btn-primary"> Submit</button>
+    </form>
+
+    <script>
+        function loadDoc(){
+        const xhttp = new XMLHttpRequest();
+        var data=[];
+            data = {
+                        Name: document.getElementById("name").value,
+                        Username: document.getElementById("uname").value,
+                        Email: document.getElementById("email").value,
+                        Phone: document.getElementById("phone").value,
+                        Address: document.getElementById("address").value,
+                        Password: document.getElementById("password").value,
+                        Job_Type: document.getElementById("jobtype").value
+                    };
+                  
+                    console.log(JSON.stringify(data));
+      xhttp.open("post", "http://127.0.0.1:8000/api/Corporate/ApiRegistration");
+      xhttp.setRequestHeader('Content-Type', 'application/json');
+      xhttp.responseType = 'json';
+      xhttp.send(JSON.stringify(data));
+      xhttp.onload = () => {
+      console.log(xhttp.response);
+      };
+
+    }
+        
+        </script>
+    
+
+</body>
+</html>

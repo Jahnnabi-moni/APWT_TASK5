@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+	<title>Registration Get Data</title>
+</head>
+<body class="container" onload="loadDoc()">
+
+<table class="table table-borded">
+    <tr>
+        
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Job Type</th>
+    </tr>
+        <tr>
+            
+            <td id="name"></td>
+            <td id="username"></td>
+            <td id="email"></td>
+            <td id="phone"></td>
+            <td id="address"></td>
+            <td id="jobtype"></td>
+        </tr>
+</table>
+<script>
+		function loadDoc(){
+			const xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					var objArr = JSON.parse(this.responseText);
+					console.log(objArr);
+					document.getElementById("name").innerHTML = objArr[0].Name;
+					document.getElementById("username").innerHTML = objArr[0].Username;
+					document.getElementById("email").innerHTML = objArr[0].Email;
+					document.getElementById("phone").innerHTML = objArr[0].Phone;
+					document.getElementById("address").innerHTML = objArr[0].Address;
+					document.getElementById("jobtype").innerHTML = objArr[0].Job_Type;
+				}
+			};
+			xhttp.open("GET", "http://127.0.0.1:8000/api/dashboard");
+			xhttp.send();
+		}
+	</script>
+</body>
+</html>
